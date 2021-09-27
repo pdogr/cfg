@@ -39,20 +39,39 @@ Plug 'rhysd/vim-clang-format'
 Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'jiangmiao/auto-pairs'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'chriskempson/base16-vim'
+Plug 'alx741/vim-hindent'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
+Plug 'rhysd/vim-clang-format'
+Plug 'preservim/nerdtree'
+Plug 'vim-syntastic/syntastic'
 Plug 'vhda/verilog_systemverilog.vim'
-set nocompatible
-
 call plug#end()
+set nocompatible
+let g:syntastic_cpp_checkers = ['cpplint']
+let g:syntastic_c_checkers = ['cpplint']
+let g:syntastic_cpp_cpplint_exec = 'cpplint'
+" The following two lines are optional. Configure it to your liking!
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+nnoremap <Leader>f :<C-u>ClangFormat<CR>
 
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
 if has('nvim')
     set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
     set inccommand=nosplit
     noremap <C-q> :confirm qall<CR>
 end
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 " deal with colors
 if !has('gui_running')
@@ -188,10 +207,9 @@ set wildmode=longest:full,full
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
 " Use wide tabs
-set shiftwidth=8
-set softtabstop=8
-set tabstop=8
-set noexpandtab
+set shiftwidth=1
+set softtabstop=1
+set tabstop=1
 
 " Wrapping options
 set formatoptions=tc " wrap text and comments using textwidth
@@ -362,6 +380,12 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocAction' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocAction' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -605,8 +629,8 @@ map <C-a> <ESC>^
 imap <C-a> <ESC>I
 map <C-e> <ESC>$
 imap <C-e> <ESC>A
-inoremap <C-f> <ESC><Space>Wi
-inoremap <C-b> <Esc>Bi
+inoremap <C-f> <ESC><Space>wi
+inoremap <C-b> <Esc>bi
 inoremap <C-d> <ESC>cW
 
 
@@ -638,3 +662,5 @@ autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
 
+let g:hindent_on_save = 1
+let g:hindent_indent_size = 1
