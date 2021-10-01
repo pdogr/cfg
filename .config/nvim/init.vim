@@ -664,3 +664,4 @@ autocmd FileType go nmap <leader>t  <Plug>(go-test)
 
 let g:hindent_on_save = 1
 let g:hindent_indent_size = 1
+
