@@ -1,0 +1,11 @@
+
+xmonad.hs:370:5: error:
+    Ambiguous occurrence ‘workspaces’
+    It could refer to
+       either ‘XMonad.workspaces’,
+              imported from ‘XMonad’ at xmonad.hs:22:1-13
+              (and originally defined in ‘XMonad.Core’)
+           or ‘Main.workspaces’, defined at xmonad.hs:93:1
+    |
+370 |   , workspaces = myWorkspaces
+    |     ^^^^^^^^^^
