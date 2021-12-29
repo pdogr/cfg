@@ -45,7 +45,6 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'chriskempson/base16-vim'
 Plug 'alx741/vim-hindent'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-
 Plug 'rhysd/vim-clang-format'
 Plug 'preservim/nerdtree'
 Plug 'vim-syntastic/syntastic'
@@ -88,17 +87,6 @@ hi Normal ctermbg=NONE
 " Brighter comments
 
 " Plugin settings
-let g:secure_modelines_allowed_items = [
-                \ "textwidth",   "tw",
-                \ "softtabstop", "sts",
-                \ "tabstop",     "ts",
-                \ "shiftwidth",  "sw",
-                \ "expandtab",   "et",   "noexpandtab", "noet",
-                \ "filetype",    "ft",
-                \ "foldmethod",  "fdm",
-                \ "readonly",    "ro",   "noreadonly", "noro",
-                \ "rightleft",   "rl",   "norightleft", "norl",
-                \ ]
 
 " Lightline
 let g:lightline = {
@@ -147,7 +135,6 @@ nmap <leader>w :w<CR>
 
 " Don't confirm .lvimrc
 let g:localvimrc_ask = 0
-
 " rust
 let g:rustfmt_autosave = 1
 let g:rustfmt_emit_files = 1
@@ -223,6 +210,7 @@ set incsearch
 set ignorecase
 set smartcase
 set gdefault
+set foldmethod=syntax
 
 " Search results centered please
 nnoremap <silent> n nzz
@@ -444,9 +432,8 @@ noremap <leader>m ct_
 " I can type :help on my own, thanks.
 map <F1> <Esc>
 imap <F1> <Esc>
-map <C-w>- :split<CR>
-map <C-w>. :vsplit<CR>
-map <C-w>j :close<CR>
+map <C-w>' :split<CR>
+map <C-w>5 :vsplit<CR>
 map <C-w>x :q!<CR>
 map <C-w>, <C-w>=
 
@@ -464,10 +451,12 @@ cnoremap <C-v> <C-r>"
 cnoremap <C-q> <S-Right><C-w>
 
 set hidden
-nnoremap <C-h> :bprev<CR>
-nnoremap <C-l> :bnext<CR>
+nnoremap <C-h> :tabprev<CR>
+nnoremap <C-l> :tabnext<CR>
+nnoremap <C-n> :tabnew<CR>
+nnoremap <C-q> :tabclose<CR>
 nnoremap <Leader>bb :edit <C-R>=expand("%:p:h")<CR>/
-nnoremap <Leader>bg :buffers<CR>:buffer<Space>
+
 nnoremap <Leader>bw :lcd %:p:h<CR>:pwd<CR>
 nnoremap <Leader>by :let @+=expand("%:p")<CR>
 
