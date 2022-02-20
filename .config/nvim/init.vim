@@ -50,6 +50,7 @@ Plug 'preservim/nerdtree'
 Plug 'vim-syntastic/syntastic'
 Plug 'vhda/verilog_systemverilog.vim'
 call plug#end()
+
 set nocompatible
 let g:syntastic_cpp_checkers = ['cpplint']
 let g:syntastic_c_checkers = ['cpplint']
@@ -538,7 +539,6 @@ set matchtime=2
 set noerrorbells
 set novisualbell
 
-set cursorline
 set nocursorcolumn
 set laststatus=2
 syntax enable
@@ -597,7 +597,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+local servers = { 'pyright', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
